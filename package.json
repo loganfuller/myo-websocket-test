@@ -1,0 +1,19 @@
+{
+  "name": "myo-websocket-test",
+  "version": "0.0.1",
+  "description": "Just testing out myo websockets",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loganfuller/myo-websocket-test"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "lodash": "*"
+  },
+  "engines": {
+    "node": ">= 0.10.x"
+  }
+}
