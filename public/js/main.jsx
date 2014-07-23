@@ -51,6 +51,7 @@ var App = React.createClass({
                     }
                 }
             });
+            window.myoOrientation = this.state;
         }
     },
     componentDidMount: function() {
@@ -94,3 +95,4 @@ React.renderComponent(
     </div>,
     document.getElementById('content')
 );
+
