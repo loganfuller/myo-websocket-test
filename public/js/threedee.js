@@ -22,11 +22,11 @@ document.body.appendChild( renderer.domElement );
 // var mesh = new THREE.Mesh( geometry, material );
 // scene.add( mesh );
 
-camera.position.z = 50;
+camera.position.z = 150;
 
 var jsonLoader = new THREE.JSONLoader();
 var mesh = null;
-jsonLoader.load( "models/SwordMinecraft/SwordMinecraft.js", function (geometry, materials) {
+jsonLoader.load( "models/katana/katana.js", function (geometry, materials) {
     mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial( materials ) );
     scene.add( mesh );
     render();
@@ -37,12 +37,21 @@ function render() {
     requestAnimationFrame(render);
 
     if(window.myoOrientation) {
-        mesh.quaternion.set(
-            window.myoOrientation.orientation.x,
-            window.myoOrientation.orientation.y,
-            window.myoOrientation.orientation.z,
-            window.myoOrientation.orientation.w
-        );
+        var orientation = (new THREE.Euler()).setFromQuaternion(new THREE.Quaternion(
+                window.myoOrientation.orientation.x,
+                window.myoOrientation.orientation.y,
+                window.myoOrientation.orientation.z,
+                window.myoOrientation.orientation.w
+            )),
+            offset = (new THREE.Euler()).setFromQuaternion(new THREE.Quaternion(
+                window.myoOrientation.offset.x,
+                window.myoOrientation.offset.y,
+                window.myoOrientation.offset.z,
+                window.myoOrientation.offset.w
+            ));
+
+        mesh.rotation.set(orientation.x - offset.x, -(orientation.y - offset.y),
+            -(orientation.z - offset.z));
     }
 
     camera.lookAt(scene.position);

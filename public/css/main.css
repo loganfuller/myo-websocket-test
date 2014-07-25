@@ -16,3 +16,8 @@ canvas {
     background: none;
     padding: 50px;
 }
+
+#zeroOrientation {
+    margin-top: 1em;
+    color: black;
+}

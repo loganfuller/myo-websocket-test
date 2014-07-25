@@ -1,5 +1,16 @@
 /** @jsx React.DOM */
 
+var average = function(arr) {
+    var x = 0.0,
+        length = arr.length;
+
+    for(var i = 0; i < length; i++) {
+        x += parseFloat(arr[i]);
+    }
+
+    return x / length;
+};
+
 var App = React.createClass({
     getInitialState: function() {
         return {
@@ -11,6 +22,22 @@ var App = React.createClass({
                 y: 0.0,
                 z: 0.0,
                 w: 0.0,
+                accelerometer: {
+                    x: 0.0,
+                    y: 0.0,
+                    z: 0.0
+                },
+                gyroscope: {
+                    x: 0.0,
+                    y: 0.0,
+                    z: 0.0
+                }
+            },
+            offset: {
+                x: 0,
+                y: 0,
+                z: 0,
+                w: 0,
                 accelerometer: {
                     x: 0.0,
                     y: 0.0,
@@ -66,6 +93,65 @@ var App = React.createClass({
             this.state.socket.onmessage = this.handleSocketMessage;
         });
     },
+    zeroOrientation: function() {
+        console.log("Setting orientation zero...");
+
+        var that = this;
+
+        var orientationBuffer = {
+            x: [],
+            y: [],
+            z: [],
+            w: [],
+            accelerometer: {
+                x: [],
+                y: [],
+                z: []
+            },
+            gyroscope: {
+                x: [],
+                y: [],
+                z: []
+            }
+        };
+
+        var interval = setInterval(function() {
+            orientationBuffer.x.push(that.state.orientation.x);
+            orientationBuffer.y.push(that.state.orientation.y);
+            orientationBuffer.z.push(that.state.orientation.z);
+            orientationBuffer.w.push(that.state.orientation.w);
+
+            orientationBuffer.accelerometer.x.push(that.state.orientation.accelerometer.x);
+            orientationBuffer.accelerometer.y.push(that.state.orientation.accelerometer.y);
+            orientationBuffer.accelerometer.z.push(that.state.orientation.accelerometer.z);
+
+            orientationBuffer.gyroscope.x.push(that.state.orientation.gyroscope.x);
+            orientationBuffer.gyroscope.y.push(that.state.orientation.gyroscope.y);
+            orientationBuffer.gyroscope.z.push(that.state.orientation.gyroscope.z);
+        }, 25);
+
+        setTimeout(function() {
+            clearInterval(interval);
+            that.setState({
+                "offset": {
+                    x: average(orientationBuffer.x),
+                    y: average(orientationBuffer.y),
+                    z: average(orientationBuffer.z),
+                    w: average(orientationBuffer.w),
+                    accelerometer: {
+                        x: average(orientationBuffer.accelerometer.x),
+                        y: average(orientationBuffer.accelerometer.y),
+                        z: average(orientationBuffer.accelerometer.z)
+                    },
+                    gyroscope: {
+                        x: average(orientationBuffer.gyroscope.x),
+                        y: average(orientationBuffer.gyroscope.y),
+                        z: average(orientationBuffer.gyroscope.z)
+                    }
+                }
+            });
+        }, 500);
+    },
     render: function() {
         return (
             <div>
@@ -84,6 +170,7 @@ var App = React.createClass({
                 <p><b>Gyroscope (x)</b>: {this.state.orientation.gyroscope.x}</p>
                 <p><b>Gyroscope (y)</b>: {this.state.orientation.gyroscope.y}</p>
                 <p><b>Gyroscope (z)</b>: {this.state.orientation.gyroscope.z}</p>
+                <button id="zeroOrientation" onClick={this.zeroOrientation}>Zero Orientation Data</button>
             </div>
         );
     }
