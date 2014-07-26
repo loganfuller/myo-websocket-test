@@ -14,6 +14,7 @@ scene.add( directionalLight );
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.domElement.id = "threeJs";
 document.body.appendChild( renderer.domElement );
 
 camera.position.z = 150;

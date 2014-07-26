@@ -1,4 +1,4 @@
-canvas {
+#threeJs {
     position: absolute;
     top: 0;
     left: 0;
@@ -7,17 +7,29 @@ canvas {
     z-index: 1;
 }
 
-#content {
+#sensorData {
     color: white;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
     background: none;
-    padding: 50px;
+    padding: 35px;
 }
 
 #zeroOrientation {
     margin-top: 1em;
     color: black;
+}
+
+#accelerometerGraph {
+    position: fixed;
+    left: 35px;
+    bottom: 35px;
+}
+
+#gyroscopeGraph {
+    position: fixed;
+    right: 35px;
+    bottom: 35px;
 }
