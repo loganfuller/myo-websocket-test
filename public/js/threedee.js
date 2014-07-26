@@ -16,13 +16,8 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-// Load 3D model
-// var geometry = new THREE.BoxGeometry(1,1,1);
-// var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-// var mesh = new THREE.Mesh( geometry, material );
-// scene.add( mesh );
-
 camera.position.z = 150;
+// camera.position.z = 50;
 
 var jsonLoader = new THREE.JSONLoader();
 var mesh = null;
@@ -50,8 +45,10 @@ function render() {
                 window.myoOrientation.offset.w
             ));
 
-        mesh.rotation.set(orientation.x - offset.x, -(orientation.y - offset.y),
-            -(orientation.z - offset.z));
+        mesh.quaternion.set(window.myoOrientation.orientation.y, -window.myoOrientation.orientation.z, window.myoOrientation.orientation.x, -window.myoOrientation.orientation.w);
+
+// mesh.rotation.set(orientation.z - offset.z, orientation.y - offset.y,
+//          -(orientation.x - offset.x));
     }
 
     camera.lookAt(scene.position);

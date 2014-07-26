@@ -51,11 +51,17 @@ var App = React.createClass({
             }
         };
     },
+    handleGesture: _.debounce(function(poseName) {
+        if(poseName === "fingers_spread") {
+            this.zeroOrientation();
+        }
+    }, 150),
     handleSocketMessage: function(e) {
         var d = JSON.parse(e.data);
 
         if(d[0] === "event" && d[1].type === "pose") {
             this.setState({pose: d[1].pose});
+            this.handleGesture(d[1].pose);
         }
 
         if(d[0] === "event" && d[1].type === "orientation") {
