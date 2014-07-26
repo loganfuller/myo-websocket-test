@@ -163,9 +163,15 @@ var App = React.createClass({
             orientationBuffer.z.push(that.state.orientation.z);
             orientationBuffer.w.push(that.state.orientation.w);
 
-            orientationBuffer.accelerometer.x.push(that.state.orientation.accelerometer.x);
-            orientationBuffer.accelerometer.y.push(that.state.orientation.accelerometer.y);
-            orientationBuffer.accelerometer.z.push(that.state.orientation.accelerometer.z);
+            orientationBuffer.accelerometer.x.push(
+                that.state.orientation.accelerometer.x
+            );
+            orientationBuffer.accelerometer.y.push(
+                that.state.orientation.accelerometer.y
+            );
+            orientationBuffer.accelerometer.z.push(
+                that.state.orientation.accelerometer.z
+            );
 
             orientationBuffer.gyroscope.x.push(that.state.orientation.gyroscope.x);
             orientationBuffer.gyroscope.y.push(that.state.orientation.gyroscope.y);
@@ -198,21 +204,45 @@ var App = React.createClass({
         return (
             <div>
                 <div id="textual">
-                    <p><b>Myo ID</b>: {this.state.myoId}</p>
-                    <p><b>Pose</b>: {this.state.pose}</p>
+                    <p>
+                        <b>Myo ID</b>: {this.state.myoId}
+                    </p>
+                    <p>
+                        <b>Pose</b>: {this.state.pose}
+                    </p>
                     <hr/>
-                    <p><b>Orientation (x)</b>: {this.state.orientation.x.toFixed(3)}</p>
-                    <p><b>Orientation (y)</b>: {this.state.orientation.y.toFixed(3)}</p>
-                    <p><b>Orientation (z)</b>: {this.state.orientation.z.toFixed(3)}</p>
-                    <p><b>Orientation (w)</b>: {this.state.orientation.w.toFixed(3)}</p>
+                    <p>
+                        <b>Orientation (x)</b>: {this.state.orientation.x.toFixed(3)}
+                    </p>
+                    <p>
+                        <b>Orientation (y)</b>: {this.state.orientation.y.toFixed(3)}
+                    </p>
+                    <p>
+                        <b>Orientation (z)</b>: {this.state.orientation.z.toFixed(3)}
+                    </p>
+                    <p>
+                        <b>Orientation (w)</b>: {this.state.orientation.w.toFixed(3)}
+                    </p>
                     <hr/>
-                    <p><b>Accelerometer (x)</b>: {this.state.orientation.accelerometer.x.toFixed(3)}</p>
-                    <p><b>Accelerometer (y)</b>: {this.state.orientation.accelerometer.y.toFixed(3)}</p>
-                    <p><b>Accelerometer (z)</b>: {this.state.orientation.accelerometer.z.toFixed(3)}</p>
+                    <p>
+                        <b>Accelerometer (x)</b>: {this.state.orientation.accelerometer.x.toFixed(3)}
+                    </p>
+                    <p>
+                        <b>Accelerometer (y)</b>: {this.state.orientation.accelerometer.y.toFixed(3)}
+                    </p>
+                    <p>
+                        <b>Accelerometer (z)</b>: {this.state.orientation.accelerometer.z.toFixed(3)}
+                    </p>
                     <hr/>
-                    <p><b>Gyroscope (x)</b>: {this.state.orientation.gyroscope.x.toFixed(3)}</p>
-                    <p><b>Gyroscope (y)</b>: {this.state.orientation.gyroscope.y.toFixed(3)}</p>
-                    <p><b>Gyroscope (z)</b>: {this.state.orientation.gyroscope.z.toFixed(3)}</p>
+                    <p>
+                        <b>Gyroscope (x)</b>: {this.state.orientation.gyroscope.x.toFixed(3)}
+                    </p>
+                    <p>
+                        <b>Gyroscope (y)</b>: {this.state.orientation.gyroscope.y.toFixed(3)}
+                    </p>
+                    <p>
+                        <b>Gyroscope (z)</b>: {this.state.orientation.gyroscope.z.toFixed(3)}
+                    </p>
                 </div>
                 <div id="accelerometerGraph">
                     <p>Accelerometer (<span style={{color: "rgb(220,50,47)"}}>x</span><span style={{color: "rgb(42,161,152)"}}>y</span><span style={{color: "rgb(38,139,210)"}}>z</span>)</p>
